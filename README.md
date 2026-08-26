@@ -1,0 +1,8 @@
+aws-dev-environment/
+├── README.md
+├── provider.tf
+├── variables.tf
+├── main.tf
+├── outputs.tf
+├── terraform.tfvars.example
+└── .gitignore
