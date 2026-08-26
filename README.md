@@ -1,3 +1,8 @@
+# AWS Dev Environment
+
+## Project Structure
+
+```text
 aws-dev-environment/
 ├── README.md
 ├── provider.tf
@@ -6,3 +11,4 @@ aws-dev-environment/
 ├── outputs.tf
 ├── terraform.tfvars.example
 └── .gitignore
+```
