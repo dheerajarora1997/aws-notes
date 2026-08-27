@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: "2026-09-09"
+
+Resources:
+  NotificationTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: application-notifications
+
+Outputs:
+  TopicArn:
+    Value: !Ref NotificationTopic
