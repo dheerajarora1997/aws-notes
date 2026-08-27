@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: "2026-09-09"
+
+Parameters:
+  DBUsername:
+    Type: String
+    Default: appuser
+
+  DBPassword:
+    Type: String
+    NoEcho: true
+    MinLength: 12
+
+Resources:
+  Database:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      Engine: postgres
+      DBInstanceClass: db.t4g.micro
+      AllocatedStorage: 20
+      StorageType: gp3
+
+      DBName: appdb
+      MasterUsername: !Ref DBUsername
+      MasterUserPassword: !Ref DBPassword
+
+      PubliclyAccessible: false
+
+      BackupRetentionPeriod: 7
+      DeletionProtection: false
+
+Outputs:
+  DatabaseEndpoint:
+    Value: !GetAtt Database.Endpoint.Address
