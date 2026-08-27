@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: EC2 key pair name
+
+Resources:
+  WebSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow SSH and HTTP
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  WebServer:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t3.micro
+      ImageId: ami-xxxxxxxxxxxxxxxxx
+      KeyName: !Ref KeyName
+      SecurityGroupIds:
+        - !Ref WebSecurityGroup
+
+Outputs:
+  InstanceId:
+    Value: !Ref WebServer
