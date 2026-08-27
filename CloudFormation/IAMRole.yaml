@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Resources:
+  EC2S3Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - sts:AssumeRole
+
+      Policies:
+        - PolicyName: S3ReadAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:ListBucket
+                Resource: "*"
+
+  EC2InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref EC2S3Role
+
+Outputs:
+  InstanceProfile:
+    Value: !Ref EC2InstanceProfile
