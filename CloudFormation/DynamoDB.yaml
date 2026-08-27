@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: "2026-09-09"
+
+Resources:
+  UsersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+
+      AttributeDefinitions:
+        - AttributeName: UserId
+          AttributeType: S
+
+      KeySchema:
+        - AttributeName: UserId
+          KeyType: HASH
+
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+
+Outputs:
+  TableName:
+    Value: !Ref UsersTable
